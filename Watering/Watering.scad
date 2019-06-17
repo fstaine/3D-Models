@@ -1,24 +1,25 @@
-$fn = ($preview ? 16 : 256);
+
+$fn = ($preview ? 16 : 128);
 
 /*****************/
 /*   Constants   */
 /*****************/
 
 thikness = 2;
-holeRadius = 6;
+holeRadius = 12;
 
 // beak
-beakLength = 30;
+beakLength = 100;
 beakXScale = 1.5;
 beaxYScale = 0.5;
 
 // Base
-baseLength = 30;
-baseWidth = 15;
+baseLength = 100;
+baseWidth = 60;
 baseCutAngle = 40;
 
 // refill
-refillHeight = 5;
+refillHeight = 12;
 
 /*****************/
 /*    Shapes     */
