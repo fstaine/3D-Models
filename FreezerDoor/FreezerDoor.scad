@@ -1,30 +1,30 @@
-$fn = 20;
+$fn = ( $preview ? 20 : 200);
 
-height = 120;
-thikness = 4;
-baseWidth = 60;
-edgeWidth = 30;
-gripRadius = 6;
+height = 99;
+thikness = 2.3;
+baseWidth = 35;
+edgeWidth = 18.5;
+gripRadius = 3.5;
 gripHoleRadius = gripRadius- thikness;
 gripMargin = gripRadius;
 
 // space between edge & paw
 pawSpace = 1;
-pawWidth = 12;
-pawHeight = 18;
-holeRadius = 4;
-holeLeftSpace = 3;
-holeTopSpace = 3;
+pawWidth = 8.2;
+pawHeight = 10;
+holeRadius = 2;
+holeLeftSpace = 2;
+holeTopSpace = 2;
 bevelAngle = 20;
 bevelSize = 2;
 bevelDepth = 1;
 
-edgeBevelAngle = 30;
-edgeBevelWidth = 3;
+edgeBevelAngle = 45;
+edgeBevelWidth = thikness;
 edgeHoleAngle = 60;
-edgeHolePadding = 15;
-edgeHoleWidth = 13;
-edgeHoleHeight = 18; // from the bottom of the hole
+edgeHolePadding = 21;
+edgeHoleWidth = 7;
+edgeHoleHeight = 11.5; // from the bottom of the hole
 
 
 // base
@@ -69,7 +69,7 @@ difference() {
 
 
 // paws
-!translate([thikness + pawSpace, 0, thikness]) {
+translate([thikness + pawSpace, 0, thikness]) {
     difference() {
         cube([pawWidth, thikness, pawHeight]);
         // Hole
