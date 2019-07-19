@@ -1,31 +1,30 @@
 $fn = ( $preview ? 20 : 200);
 
-height = 99;
+height = 97;
 thikness = 2.3;
 baseWidth = 35;
 edgeWidth = 18.5;
-gripRadius = 3.5;
-gripHoleRadius = gripRadius- thikness;
+gripRadius = 4;
+gripHoleRadius = 3;
 gripMargin = gripRadius;
 
 // space between edge & paw
 pawSpace = 1;
-pawWidth = 8.2;
+pawWidth = 8.5;
 pawHeight = 10;
-holeRadius = 2;
+holeRadius = 2.3; // real diameter is 4.2
 holeLeftSpace = 2;
 holeTopSpace = 2;
 bevelAngle = 20;
 bevelSize = 2;
 bevelDepth = 1;
 
-edgeBevelAngle = 45;
+edgeBevelAngle = 30;
 edgeBevelWidth = thikness;
 edgeHoleAngle = 60;
 edgeHolePadding = 21;
 edgeHoleWidth = 7;
 edgeHoleHeight = 11.5; // from the bottom of the hole
-
 
 // base
 difference() {
@@ -39,10 +38,10 @@ difference() {
                 }
         }
     }
-    translate([baseWidth - gripMargin, height/2, 0]) {
+    translate([baseWidth - gripMargin, height/2, gripRadius-gripHoleRadius-thikness]) {
             rotate([90, 0, 0]) {
                 difference() {
-                    cylinder(height, r=gripHoleRadius, center=true);// grip hole
+                    #cylinder(height, r=gripHoleRadius, center=true);// grip hole
                 }
             }
     }
@@ -54,9 +53,10 @@ difference() {
 // edge
 difference() {
     cube([thikness, height, edgeWidth]);
-    translate([0, 0, edgeWidth - edgeBevelWidth])
-        rotate([0, -edgeBevelAngle, 0])
+    #translate([edgeBevelWidth, 0, edgeWidth])
+        rotate([0, 270-edgeBevelAngle, 0])
             cube([2*thikness, height, 2*thikness]);
+    
     translate([0, 0, edgeWidth-edgeHoleHeight])
         rotate([0, 90-edgeHoleAngle, 0])
             translate([-edgeWidth, 0, 00]) {
@@ -69,35 +69,23 @@ difference() {
 
 
 // paws
-translate([thikness + pawSpace, 0, thikness]) {
+module paw() {
     difference() {
-        cube([pawWidth, thikness, pawHeight]);
+        cube([pawWidth, thikness, pawHeight + thikness]);
         // Hole
-        translate([pawWidth/2, thikness/2, pawHeight - holeRadius - holeTopSpace]) {
+        translate([pawWidth/2, thikness/2, pawHeight + thikness - holeRadius - holeTopSpace]) {
             rotate([0, 90, 90]) {
                 cylinder(thikness, r=holeRadius, center=true);
             }
         }
         // Bevel
-        translate([0, 0, pawHeight - bevelSize]) 
+        translate([0, 0, pawHeight - bevelSize + thikness]) 
             rotate([90-bevelAngle, 0, 0]) 
                 cube([pawWidth, 2*bevelSize, 2*bevelSize]);
     }
 }
-translate([2 * thikness + pawSpace + pawWidth, height, 0]) rotate([0, 0, 180]) {
-    translate([thikness, 0, thikness]) {
-        difference() {
-            cube([pawWidth, thikness, pawHeight]);
-            // Hole
-            translate([pawWidth/2, thikness/2, pawHeight - holeRadius - holeTopSpace]) {
-                rotate([0, 90, 90]) {
-                    cylinder(thikness, r=holeRadius, center=true);
-                }
-            }
-            // Bevel
-            translate([0, 0, pawHeight - bevelSize]) 
-                rotate([90-bevelAngle, 0, 0]) 
-                    cube([pawWidth, 2*bevelSize, 2*bevelSize]);
-        }
-    }
+
+union() {
+    translate([thikness + pawSpace, 0, 0]) paw();
+    translate([thikness + pawSpace + pawWidth, height, 0]) rotate([0, 0, 180]) paw();
 }
