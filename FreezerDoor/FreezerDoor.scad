@@ -1,6 +1,6 @@
 $fn = ( $preview ? 20 : 200);
 
-height = 97;
+height = 98;
 thikness = 2.3;
 baseWidth = 35;
 edgeWidth = 18.5;
