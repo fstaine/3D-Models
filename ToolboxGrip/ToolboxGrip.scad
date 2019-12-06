@@ -1,7 +1,7 @@
 
 $fn = ($preview ? 16 : 256);
 
-holeDiam = 2.7;
+holeDiam = 3;
 circleDiam = 7.9;
 spacement = 41.8;
 stopDiam = 2.8;
@@ -12,7 +12,7 @@ stopOut = 1.2;
 
 maxThikness = 9;
 medThikness = 6;
-smallThikness = 3;
+smallThikness = 3.2;
 
 overThiknessWidth = 13;
 
@@ -27,7 +27,7 @@ linear_extrude(width) {
 	difference() {
 		union() {
 			circle(d=circleDiam);
-			translate([circleDiam/2*sin(45), -circleDiam/2*cos(45)]) rotate(45) square([11, 3]);
+			translate([circleDiam/2*sin(45), -circleDiam/2*cos(45)]) rotate(45) square([11, 3.5]);
 			translate([0, circleDiam/2]) rotate(270+10) square([(circleDiam-holeDiam)/2, 7]);
 		}
 		circle(d=holeDiam);
@@ -43,13 +43,12 @@ linear_extrude(width) {
 		minkowski() {
 			translate([0, 0.3-stopDiam/2]) difference() {
 				translate(gripCenter) circle(gripRadius);
-				rotate(-115) square(50);
+				rotate(-112) square(50);
 				rotate(90) square(50);
 				rotate(180) square(50);
 			}
 			circle(0.3);
 		}
-		*rotate(270) square([7, 12]);
 		translate([0, 7.52]) rotate(180) {
 			square([34, smallThikness]);
 			translate([0.3, smallThikness]) difference() {
