@@ -50,7 +50,7 @@ module coffee() {
 module watch() {
     // Bracelet
     scale([10, 10]) union() {
-        circle();
+        cylinder();
         bracelet();
         rotate([0, 0, 180]) bracelet();
     }
@@ -61,8 +61,8 @@ module watch() {
     }
     // Crown
     translate([0, 0, 1]) scale([10, 10]) difference() {
-        circle();
-        circle(r= 0.9);
+        cylinder();
+        cylinder(r= 0.9);
      }
  }
 
@@ -71,15 +71,15 @@ module head() {
 }
 
 module bracelet() {
-    translate([-0.5, 0]) square([1, 1.75]);
+    translate([-0.5, 0]) cube([1, 1.75, 1]);
 }
 
 module main() {
     rotate([0, 0, 180]) heart();
-    translate([0, -0.2, 0.3]) rotate([0, 180, 0]) scale(0.45) coffee();
-    translate([0.5, 0.5, 0]) scale([0.07, 0.07, 0.1]) rotate([0, 180, -30]) watch();
+    translate([0.2, -0.2, 0.1]) mirror([1, 0, 0]) scale(0.45) coffee();
+//    translate([0, -0.2, 0.3]) rotate([0, 180, 0]) rotate([0, 0, 180]) scale(0.45) coffee();
+//    translate([0, -0.2, 0.3]) rotate([0, 180, 0]) scale(0.45) coffee();
+    translate([0.4, 0.5, 0]) scale([0.07, 0.07, 0.1]) rotate([0, 180, -40]) watch();
 }
 
-//scale(10) main();
-watch();
-//coffee();
+scale(10) main();
